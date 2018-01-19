@@ -8,24 +8,36 @@ the communication with Solr, Solarium also relieves you of handling all the comp
 well documented API.
 
 Please see the docs for a more detailed description.
+## Installation
 
-## Requirements
+**TL;DR**
+```bash
+composer require solarium/solarium php-http/curl-client guzzlehttp/psr7
+```
 
-Solarium only supports PHP 7.0 and up.
-
-It's highly recommended to have Curl enabled in your PHP environment. However if you don't have Curl available you can
-switch from using Curl (the default) to another client adapter. The other adapters don't support all the features of the
-Curl adapter.
-
-## Getting started
-
-The preferred way to install Solarium is by using Composer. Solarium is available on Packagist.
+This library does not have a dependency on Guzzle or any other library that sends HTTP requests. We use the awesome
+HTTPlug to achieve the decoupling. We want you to choose what library to use for sending HTTP requests. Consult this list
+of packages that support [php-http/client-implementation](https://packagist.org/providers/php-http/client-implementation)
+find clients to use. For more information about virtual packages please refer to
+[HTTPlug](http://docs.php-http.org/en/latest/httplug/users.html).
 
 Example:
-```
- composer require solarium/solarium
+```bash
+composer require php-http/curl-client
 ```
 
+You do also need to install a PSR-7 implementation and a factory to create PSR-7 messages (PSR-17 whenever that is
+released). You could use Guzzles PSR-7 implementation and factories from php-http:
+
+```bash
+composer require guzzlehttp/psr7
+```
+
+Now you may install the library by running the following:
+
+```bash
+composer require solarium/solarium
+```
 ## More information
 
 * Docs
