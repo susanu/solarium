@@ -3,6 +3,7 @@
 namespace Solarium\Core\Query;
 
 use Solarium\Core\Configurable;
+use Solarium\QueryType\Select\Query\Query;
 
 /**
  * Base class for all query types, not intended for direct usage.
@@ -27,53 +28,32 @@ abstract class AbstractQuery extends Configurable implements QueryInterface
      */
     protected $params = [];
 
-    /**
-     * Set handler option.
-     *
-     * @param string $handler
-     *
-     * @return self Provides fluent interface
-     */
-    public function setHandler($handler)
+    public function requiresSolrCore(): bool
     {
-        return $this->setOption('handler', $handler);
+        return false;
     }
 
-    /**
-     * Get handler option.
-     *
-     * @return string
-     */
-    public function getHandler()
+
+    public function setHandler(string $handler): QueryInterface
+    {
+        $this->setOption('handler', $handler);
+
+        return $this;
+    }
+
+    public function getHandler(): string
     {
         return $this->getOption('handler');
     }
 
-    /**
-     * Set resultclass option.
-     *
-     * If you set a custom result class it must be available through autoloading
-     * or a manual require before calling this method. This is your
-     * responsibility.
-     *
-     * Also you need to make sure it extends the orginal result class of the
-     * query or has an identical API.
-     *
-     * @param string $classname
-     *
-     * @return self Provides fluent interface
-     */
-    public function setResultClass($classname)
+    public function setResultClass(string $className): QueryInterface
     {
-        return $this->setOption('resultclass', $classname);
+        $this->setOption('resultclass', $className);
+
+        return $this;
     }
 
-    /**
-     * Get resultclass option.
-     *
-     * @return string
-     */
-    public function getResultClass()
+    public function getResultClass(): string
     {
         return $this->getOption('resultclass');
     }
@@ -129,7 +109,7 @@ abstract class AbstractQuery extends Configurable implements QueryInterface
      *
      * @return Helper
      */
-    public function getHelper()
+    public function getHelper(): Helper
     {
         if (null === $this->helper) {
             $this->helper = new Helper($this);
@@ -147,21 +127,16 @@ abstract class AbstractQuery extends Configurable implements QueryInterface
      * @param string $name
      * @param string $value
      *
-     * @return self Provides fluent interface
+     * @return self
      */
-    public function addParam($name, $value)
+    public function addParam(string $name, string $value): QueryInterface
     {
         $this->params[$name] = $value;
 
         return $this;
     }
 
-    /**
-     * Get extra params.
-     *
-     * @return array
-     */
-    public function getParams()
+    public function getParams(): array
     {
         return $this->params;
     }

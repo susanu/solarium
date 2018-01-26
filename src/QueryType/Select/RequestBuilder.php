@@ -3,14 +3,14 @@
 namespace Solarium\QueryType\Select;
 
 use Solarium\Core\Client\Request;
-use Solarium\Core\Query\AbstractRequestBuilder as BaseRequestBuilder;
+use Solarium\Core\Query\AbstractRequestBuilder;
 use Solarium\Core\Query\QueryInterface;
 use Solarium\QueryType\Select\Query\Query as SelectQuery;
 
 /**
  * Build a select request.
  */
-class RequestBuilder extends BaseRequestBuilder
+class RequestBuilder extends AbstractRequestBuilder
 {
     /**
      * Build request for a select query.

@@ -18,6 +18,8 @@ use Solarium\Component\QueryTraits\StatsTrait;
 use Solarium\Component\QueryTraits\SuggesterTrait;
 use Solarium\Core\Client\Client;
 use Solarium\Core\Query\AbstractQuery;
+use Solarium\Core\Query\RequestBuilderInterface;
+use Solarium\Core\Query\ResponseParserInterface;
 use Solarium\Exception\InvalidArgumentException;
 use Solarium\QueryType\Select\RequestBuilder;
 use Solarium\QueryType\Select\ResponseParser;
@@ -129,32 +131,17 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface
         parent::__construct($options);
     }
 
-    /**
-     * Get type for this query.
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return Client::QUERY_SELECT;
     }
 
-    /**
-     * Get a requestbuilder for this query.
-     *
-     * @return RequestBuilder
-     */
-    public function getRequestBuilder()
+    public function getRequestBuilder(): RequestBuilderInterface
     {
         return new RequestBuilder();
     }
 
-    /**
-     * Get a response parser for this query.
-     *
-     * @return ResponseParser
-     */
-    public function getResponseParser()
+    public function getResponseParser(): ResponseParserInterface
     {
         return new ResponseParser();
     }
@@ -259,30 +246,6 @@ class Query extends AbstractQuery implements ComponentAwareQueryInterface
     public function getStart()
     {
         return $this->getOption('start');
-    }
-
-    /**
-     * Set a custom resultclass.
-     *
-     * @param string $value classname
-     *
-     * @return self Provides fluent interface
-     */
-    public function setResultClass($value)
-    {
-        return $this->setOption('resultclass', $value);
-    }
-
-    /**
-     * Get the current resultclass option.
-     *
-     * The value is a classname, not an instance
-     *
-     * @return string
-     */
-    public function getResultClass()
-    {
-        return $this->getOption('resultclass');
     }
 
     /**

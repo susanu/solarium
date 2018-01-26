@@ -92,19 +92,14 @@ class Configurable implements ConfigurableInterface
      *
      * @return mixed
      */
-    public function getOption($name)
+    public function getOption(string $name)
     {
         if (isset($this->options[$name])) {
             return $this->options[$name];
         }
     }
 
-    /**
-     * Get all options.
-     *
-     * @return array
-     */
-    public function getOptions()
+    public function getOptions(): array
     {
         return $this->options;
     }
@@ -133,9 +128,9 @@ class Configurable implements ConfigurableInterface
      * @param string $name
      * @param mixed  $value
      *
-     * @return self Provides fluent interface
+     * @return self
      */
-    protected function setOption($name, $value)
+    protected function setOption($name, $value): self
     {
         $this->options[$name] = $value;
 
