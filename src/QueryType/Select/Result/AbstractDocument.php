@@ -14,7 +14,7 @@ abstract class AbstractDocument implements \IteratorAggregate, \Countable, \Arra
      */
     protected $fields;
 
-    abstract public function __set($name, $value): self;
+    abstract public function __set($name, $value): ResultDocumentInterface;
 
     /**
      * Get field value by name.
