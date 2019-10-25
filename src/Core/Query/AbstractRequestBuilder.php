@@ -39,6 +39,7 @@ abstract class AbstractRequestBuilder implements RequestBuilderInterface
         if ($query::WT_JSON === $query->getResponseWriter()) {
             // Only flat JSON format is supported. Other JSON formats are easier to handle but might loose information.
             $request->addParam('json.nl', 'flat');
+            $request->addParam('indent', 'off');
         }
 
         $isServerQuery = ($query instanceof AbstractServerQuery);
