@@ -232,6 +232,15 @@ class RequestBuilder extends BaseRequestBuilder
         if (Document::MODIFIER_SET === $modifier && is_array($value) && empty($value)) {
             $value = null;
         }
+        
+        if(is_array($value)) {
+            if(isset($value[0]) && is_array($value[0])){
+                $xml .= '<field name="'.$key.'"';
+                $xml .= $this->attrib('boost', $boost);
+                $xml .= $this->attrib('update', $modifier);
+                $xml .= '>';
+            }
+        }
 
         if (is_array($value)) {
             foreach ($value as $multival) {
@@ -247,6 +256,12 @@ class RequestBuilder extends BaseRequestBuilder
             }
         } else {
             $xml .= $this->buildFieldXml($key, $boost, $value, $modifier);
+        }
+        
+        if(is_array($value)) {
+            if(isset($value[0]) && is_array($value[0])){
+                $xml .= '</field>';
+            }
         }
 
         return $xml;
